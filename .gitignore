@@ -1,0 +1,19 @@
+# Dossiers de compilaton
+target/
+bin/
+
+# configuration de l'IDE
+*.iml
+.idea/
+.vscode/
+*.swp
+
+# fichiers maven ou gradle
+.mvn/
+.gradle/
+!**/src/main/**/mvnw
+
+# fichiers logs et temporaires
+logs/
+*.log
+.DS_store
