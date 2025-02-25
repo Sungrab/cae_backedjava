@@ -1,5 +1,10 @@
 package be.vinci.cae.modele;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+
+@Entity
+@Table(name = "drinks")
 public class Drink {
     public Drink() {}
 
@@ -10,24 +15,18 @@ public class Drink {
         this.alcoholic = alcoholic;
     }
 
+    @Id
+    @GeneratedValue
+    @Getter
+    private Long id;
+    @Getter
+    @Column(unique = true)
     private String name;
+    @Getter
     private String description;
+    @Getter
     private float price;
+    @Getter
     private Boolean alcoholic;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public Boolean getAlcoholic() {
-        return alcoholic;
-    }
 }
