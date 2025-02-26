@@ -1,12 +1,17 @@
 package be.vinci.cae.modele;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "drinks")
 public class Drink {
-    public Drink() {}
 
     public Drink(String name, String description, float price, Boolean alcoholic) {
         this.name = name;
