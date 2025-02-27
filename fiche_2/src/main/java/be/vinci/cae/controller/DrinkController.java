@@ -3,9 +3,7 @@ package be.vinci.cae.controller;
 
 import be.vinci.cae.modele.Drink;
 import be.vinci.cae.service.DrinkService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,8 +15,18 @@ public class DrinkController {
         this.drinkService = drinkService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public Iterable<Drink> getDrinks() {
         return drinkService.getAllDrinks();
+    }
+    @GetMapping("/")
+    public String hello(@RequestParam(required = false) String name) {
+        return "Hello " + name;
+    }
+
+
+    @GetMapping("/{id}")
+    public Drink getDrink(@PathVariable long id) {
+        return drinkService.getDrink(id);
     }
 }
