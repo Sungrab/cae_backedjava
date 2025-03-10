@@ -1,7 +1,9 @@
 package be.vinci.ipl.cae.cae_exercices_fiche3.services;
 
 import be.vinci.ipl.cae.cae_exercices_fiche3.models.dtos.AuthenticatedUser;
+import be.vinci.ipl.cae.cae_exercices_fiche3.models.entities.Client;
 import be.vinci.ipl.cae.cae_exercices_fiche3.models.entities.User;
+import be.vinci.ipl.cae.cae_exercices_fiche3.repositories.ClientRepository;
 import be.vinci.ipl.cae.cae_exercices_fiche3.repositories.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -14,14 +16,16 @@ import java.util.Date;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private static final String jwtSecret = "ilovemypizza!";
     private static final long lifetimeJwt = 24*60*60*1000;
 
     private static final Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ClientRepository clientRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.clientRepository = clientRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -62,6 +66,7 @@ public class UserService {
     public AuthenticatedUser login(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user == null) return null;
+        if (!clientRepository.existsClientByIdClient(user.getId())) return null;
         if (!passwordEncoder.matches(password, user.getPassword())) {
             return null;
         }

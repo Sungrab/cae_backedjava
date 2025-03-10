@@ -20,6 +20,7 @@ public class CaeExercicesFiche3Application {
             System.out.println("Creating users");
             userService.register("admin", "admin");
             userService.register("user", "user");
+            userService.register("client", "client");
         };
     }
 }

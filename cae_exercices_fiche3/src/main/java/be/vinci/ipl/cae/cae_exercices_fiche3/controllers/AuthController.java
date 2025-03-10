@@ -4,12 +4,10 @@ import be.vinci.ipl.cae.cae_exercices_fiche3.models.dtos.AuthenticatedUser;
 import be.vinci.ipl.cae.cae_exercices_fiche3.models.dtos.Credentials;
 import be.vinci.ipl.cae.cae_exercices_fiche3.services.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin(origins = "http://localhost:5137")
 @RestController
 @RequestMapping("/auths")
 public class AuthController {

@@ -45,3 +45,21 @@ Content-Type: application/json
   "username":"manager",
   "password":"manager"
 }
+
+### login user non-client
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "user"
+}
+
+### login user client
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "username": "client",
+  "password": "client"
+}
