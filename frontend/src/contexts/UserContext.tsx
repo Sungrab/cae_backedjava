@@ -27,12 +27,12 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [authenticatedUser, setAuthenticatedUser] =
     useState<MaybeAuthenticatedUser>(undefined);
 
-    useEffect(() => {
-      const storedUser = getAuthenticatedUser();
-      if (storedUser) {
-        setAuthenticatedUser(storedUser);
-      }
-    }, []);
+  useEffect(() => {
+    const storedUser = getAuthenticatedUser();
+    if (storedUser) {
+      setAuthenticatedUser(storedUser);
+    }
+  }, []);
 
   const registerUser = async (newUser: User) => {
     try {
@@ -84,7 +84,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
       setAuthenticatedUser(authenticatedUser);
 
-      if (rememberMe){
+      if (rememberMe) {
         storeAuthenticatedUser(authenticatedUser);
       } else {
         clearAuthenticatedUser();

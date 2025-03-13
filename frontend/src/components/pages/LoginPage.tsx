@@ -1,6 +1,13 @@
 import { useState, SyntheticEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Checkbox, FormControlLabel, TextField, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  useTheme,
+} from '@mui/material';
 import { UserContextType } from '../../types';
 import { UserContext } from '../../contexts/UserContext';
 import './index.css';
@@ -21,7 +28,6 @@ const LoginPage = () => {
     }
   }, [navigate]);
 
-  
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
@@ -31,8 +37,6 @@ const LoginPage = () => {
       console.error('LoginPage::error: ', err);
     }
   };
-
-
 
   const handleUsernameInputChange = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;

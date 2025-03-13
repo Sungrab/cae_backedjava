@@ -1,4 +1,3 @@
-
 interface UserContextType {
   authenticatedUser: MaybeAuthenticatedUser;
   registerUser: (newUser: User) => Promise<void>;

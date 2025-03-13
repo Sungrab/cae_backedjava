@@ -25,7 +25,7 @@ describe('LoginPage', () => {
     expect(usernameInput).toBeTruthy();
     expect(passwordInput).toBeTruthy();
   });
-  
+
   test('calls loginUser without remember me and navigates to HomePage when the form is submitted', async () => {
     const loginUserMock = vi.fn((user, rememberMe) => {
       if (rememberMe) {
@@ -49,10 +49,12 @@ describe('LoginPage', () => {
         </UserContext.Provider>
       </MemoryRouter>,
     );
-    
+
     const usernameInput = screen.getByLabelText(/username/i);
     const passwordInput = screen.getByLabelText(/password/i);
-    const submitButton = screen.getByRole('button', { name: /s'authentifier/i });
+    const submitButton = screen.getByRole('button', {
+      name: /s'authentifier/i,
+    });
 
     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
@@ -90,11 +92,13 @@ describe('LoginPage', () => {
         </UserContext.Provider>
       </MemoryRouter>,
     );
-    
+
     const usernameInput = screen.getByLabelText(/username/i);
     const passwordInput = screen.getByLabelText(/password/i);
     const rememberMeCheckbox = screen.getByLabelText(/Se souvenir de moi/i);
-    const submitButton = screen.getByRole('button', { name: /s'authentifier/i });
+    const submitButton = screen.getByRole('button', {
+      name: /s'authentifier/i,
+    });
 
     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
@@ -110,8 +114,10 @@ describe('LoginPage', () => {
     const storedUser = localStorage.getItem('authenticatedUser');
     expect(storedUser).not.toBeNull();
     const parsedStoredUser = storedUser ? JSON.parse(storedUser) : {};
-    expect(parsedStoredUser).toEqual({ username: 'testuser', password: 'testpassword' });
-    
+    expect(parsedStoredUser).toEqual({
+      username: 'testuser',
+      password: 'testpassword',
+    });
 
     await waitFor(() => expect(navigateMock).toHaveBeenCalledWith('/'));
   });

@@ -7,7 +7,6 @@ import pizza from '../../assets/images/pizza.jpg';
 import { Container } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-
 const App = () => {
   const [, setActionToBePerformed] = useState(false);
 
