@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = 'http://localhost:3000/auths';
-const API_BASE_URL_users = 'http://localhost:3000/users';
+const apiBaseUrlUsers = 'http://localhost:3000/users';
 
 const defaultUserContext: UserContextType = {
   authenticatedUser: undefined,
@@ -44,7 +44,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
             'Content-Type': 'application/json',
           },
         };
-        const response = await fetch(`${API_BASE_URL_users}/me`, options);
+        const response = await fetch(`${apiBaseUrlUsers}/me`, options);
 
         if (!response.ok) {
           throw new Error('token is invalid or expired');
