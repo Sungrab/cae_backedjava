@@ -11,8 +11,10 @@ import {
   storeAuthenticatedUser,
   getAuthenticatedUser,
 } from '../utils/session';
+import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = 'http://localhost:3000/auths';
+const API_BASE_URL_users = 'http://localhost:3000/users';
 
 const defaultUserContext: UserContextType = {
   authenticatedUser: undefined,
@@ -27,11 +29,37 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [authenticatedUser, setAuthenticatedUser] =
     useState<MaybeAuthenticatedUser>(undefined);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const storedUser = getAuthenticatedUser();
-    if (storedUser) {
-      setAuthenticatedUser(storedUser);
-    }
+    const refreshToken = async () => {
+      const storedUser = getAuthenticatedUser();
+      if (!storedUser || !storedUser.token) return;
+
+      try {
+        const options = {
+          method: 'POST',
+          body: JSON.stringify(storedUser.token),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        const response = await fetch(`${API_BASE_URL_users}/me`, options);
+
+        if (!response.ok) {
+          throw new Error('token is invalid or expired');
+        }
+
+        const authenticatedUser = await response.json();
+        setAuthenticatedUser(authenticatedUser);
+        storeAuthenticatedUser(authenticatedUser);
+      } catch (err) {
+        console.error('refreshToken::error: ', err);
+        clearAuthenticatedUser();
+        navigate('/login');
+      }
+    };
+    refreshToken();
   }, []);
 
   const registerUser = async (newUser: User) => {
